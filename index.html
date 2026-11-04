@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Runner</title>
+    <!-- Preload fonts for better UX -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="content">
+                <h1 class="game-title">NEON RUNNER</h1>
+                <p class="game-subtitle">Jump, survive, and score</p>
+                
+                <div class="button-container">
+                    <button id="start-btn" class="neon-btn primary">
+                        <span class="btn-text">START GAME</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                    
+                    <button id="settings-btn" class="neon-btn secondary">
+                        <span class="btn-text">SETTINGS</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Visual Background Accents -->
+            <div class="bg-accents">
+                <div class="accent circle-1"></div>
+                <div class="accent circle-2"></div>
+                <div class="accent line-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
