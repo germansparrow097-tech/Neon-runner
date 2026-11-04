@@ -1,45 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Runner</title>
-    <!-- Preload fonts for better UX -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="game-container">
-        <!-- Start Screen -->
-        <div id="start-screen" class="screen active">
-            <div class="content">
-                <h1 class="game-title">NEON RUNNER</h1>
-                <p class="game-subtitle">Jump, survive, and score</p>
-                
-                <div class="button-container">
-                    <button id="start-btn" class="neon-btn primary">
-                        <span class="btn-text">START GAME</span>
-                        <span class="btn-glow"></span>
-                    </button>
-                    
-                    <button id="settings-btn" class="neon-btn secondary">
-                        <span class="btn-text">SETTINGS</span>
-                        <span class="btn-glow"></span>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Visual Background Accents -->
-            <div class="bg-accents">
-                <div class="accent circle-1"></div>
-                <div class="accent circle-2"></div>
-                <div class="accent line-1"></div>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#090b16"><meta name="description" content="One jump. One more run. A neon-lit arcade runner for keyboard and touch."><title>Neon Runner — Chase the horizon</title><link rel="stylesheet" href="style.css"></head>
+<body><main class="shell">
+<header><a class="brand" href="./"><b>N</b> NEON<span>RUNNER</span></a><span class="edition">ARCADE / 001</span><button id="settings-btn" class="quiet">Settings</button></header>
+<section class="intro"><div><p class="eyebrow">THE CITY NEVER STOPS. NEITHER DO YOU.</p><h1>Chase the <em>horizon.</em></h1></div><p class="intro-copy">Find your rhythm. Clear the barriers.<br>Make this run your best one yet.</p></section>
+<section class="arcade" aria-label="Neon Runner game"><div class="hud"><div class="live-label"><i></i> NIGHT SHIFT <small>ENDLESS RUN</small></div><div class="scores"><div><span>SCORE</span><strong id="score">00000</strong></div><div><span>PERSONAL BEST</span><strong id="best">00000</strong></div><button id="pause-btn" class="quiet" disabled>Pause</button></div></div>
+<div class="stage"><canvas id="game" width="960" height="440" tabindex="0" aria-label="Runner game. Space, W or Arrow Up to jump; P or Escape to pause."></canvas><div class="overlay" id="overlay"><div><p class="eyebrow" id="overlay-kicker">WELCOME TO THE AFTERHOURS</p><h2 id="overlay-title">NEON<br><span>RUNNER</span></h2><p id="overlay-copy">A little timing. A lot of nerve.</p><button id="start-btn" class="primary">LET'S RUN ↗</button><p class="hint">SPACE / ↑ TO JUMP · P TO PAUSE</p></div></div></div>
+<div class="game-footer"><span><i></i> <span id="status">READY WHEN YOU ARE</span></span><span id="pace">PACE 01</span><button id="jump-btn" class="jump" disabled>JUMP ↑</button></div></section>
+<section class="instructions" aria-label="How to play"><div><span>01</span><div><h3>One simple move</h3><p><kbd>Space</kbd> / <kbd>↑</kbd> to jump. On mobile, tap the track.</p></div></div><div><span>02</span><div><h3>Stay in the flow</h3><p>Clear the pink barriers. The city gets faster as you go.</p></div></div><div><span>03</span><div><h3>Beat your last run</h3><p>Your best score stays on this browser. Come back for more.</p></div></div></section>
+<footer><span>BUILT FOR THE <strong>ONE MORE TRY.</strong></span><span>NO DOWNLOADS. JUST RUN.</span></footer></main>
+<dialog id="settings"><form method="dialog"><div class="dialog-heading"><h2>Your setup</h2><button class="quiet" aria-label="Close settings">✕</button></div><label class="setting">Sound effects <input id="sound" type="checkbox"></label><label class="setting">Reduced motion <input id="motion" type="checkbox"></label><p class="settings-note">Sound is generated on your device. Reduced motion removes background movement and trails. Gameplay still moves.</p><button class="primary">DONE</button></form></dialog><p id="announcement" class="sr-only" role="status" aria-live="polite"></p><script src="engine.js"></script><script src="script.js"></script></body></html>

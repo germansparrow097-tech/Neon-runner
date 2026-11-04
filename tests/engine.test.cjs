@@ -1,0 +1,12 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const {Runner,FLOOR,SIZE,X} = require('../engine.js');
+const advance = (g, seconds, fps=60) => { for(let i=0;i<Math.round(seconds*fps);i++) g.update(1/fps); };
+test('ready state does not move; start and restart reset a run',()=>{const g=new Runner(); advance(g,1); assert.equal(g.distance,0); g.start(); advance(g,1); assert.ok(g.score>0); g.start(); assert.equal(g.score,0); assert.equal(g.obstacles.length,0);});
+test('jump rises, blocks mid-air jumps, and lands',()=>{const g=new Runner();g.start();assert.equal(g.jump(),true);advance(g,.1);assert.ok(g.y<FLOOR-SIZE);assert.equal(g.jump(),false);advance(g,.8);assert.equal(g.y,FLOOR-SIZE);assert.equal(g.jump(),true);});
+test('pause freezes score, obstacles and physics; resume continues',()=>{const g=new Runner();g.start();g.jump();advance(g,.1);g.pause();const before=JSON.stringify(g);advance(g,3);assert.equal(JSON.stringify(g),before);assert.equal(g.jump(),false);g.resume();advance(g,.1);assert.notEqual(JSON.stringify(g),before);});
+test('collision ends run and freezes the score',()=>{const g=new Runner();g.start();g.obstacles=[{x:X+20,w:30,h:50}];g.update(1/60);assert.equal(g.state,'over');const score=g.score;advance(g,2);assert.equal(g.score,score);});
+test('jump can clear the tallest, widest obstacle at maximum speed',()=>{const g=new Runner();g.start();g.distance=50000;g.nextSpawn=100;g.obstacles=[{x:X+120,w:46,h:60,passed:false}];g.jump();advance(g,.7);assert.equal(g.state,'running');assert.equal(g.cleared,1);});
+test('outcomes are consistent across 30, 60 and 120Hz',()=>{const distances=[30,60,120].map(fps=>{const g=new Runner(()=>.5);g.start();advance(g,1,fps);return g.distance;});assert.ok(Math.max(...distances)-Math.min(...distances)<.01);});
+test('long frame cannot teleport the player past obstacles',()=>{const g=new Runner();g.start();g.obstacles=[{x:X+40,w:30,h:50}];g.update(10);assert.equal(g.state,'over');assert.ok(g.distance<40);});
+test('spawn spacing allows landing and speed is capped',()=>{const g=new Runner(()=>0);g.start();g.distance=1e6;g.update(.01);assert.equal(g.speed,520);g.nextSpawn=0;g.update(.01);assert.ok(g.nextSpawn>=1.19);assert.equal(g.obstacles.length,1);});
